@@ -27,3 +27,9 @@ exports.getUser = (req,res,next) =>{
     const email = req.params.Email;
     console.log(email);
 }
+
+exports.Login = (req,res,next)=>{
+    const userEmail = req.body
+    const userPassword = req.body
+    console.log(req.body);
+}
