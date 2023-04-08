@@ -17,7 +17,7 @@ exports.addUser = (req,res,next) =>{
    })
    .catch(err=>{
     console.log(err);
-    res.json({
+    res.status(409).json({
         duplicate : true
     })
    })
@@ -29,7 +29,33 @@ exports.getUser = (req,res,next) =>{
 }
 
 exports.Login = (req,res,next)=>{
-    const userEmail = req.body
-    const userPassword = req.body
+    const userEmail = req.body.email;
+    const userPassword = req.body.password;
+    let userData;
     console.log(req.body);
+    Users.findOne( { where : {Email : userEmail } } )
+    .then((user)=>{
+        userData = user;
+        if(!user){
+            res.status(404).json({
+                status : "userNotFound"
+            })
+        }
+        else{
+          let userPw = userData.Password
+          console.log(userPw!=userPassword)
+          if(userPw!=userPassword){
+            res.status(401).json({
+                status : "wrongpassword"
+            })
+          }
+          else if (userPw==userPassword){
+            res.json({
+                status : "login Successfull"
+            })
+          }
+        }
+    })
+    .catch(err=>console.log(err));
+
 }
