@@ -18,7 +18,8 @@ bcrypt.hash(password,saltRounds,(err,hash)=>{
         Users.create({
           Username : name,
           Email : email,
-          Password : hash
+          Password : hash,
+          isPremiumuser : "false"
      })
         .then(()=>{
          res.json({
@@ -68,7 +69,7 @@ exports.Login = (req,res,next)=>{
                     })
 
                     function generateAccessToken(userdata){
-                        return jwt.sign({ Id : userdata.Id , name : userdata.Username },"this_is_my_secrect_key_To_get_in_my_server!!!!!");
+                        return jwt.sign({ Id : userdata.Id , name : userdata.Username },process.env.TOKEN_SECRECT);
                     }
                 }
                 else if(result==false){

@@ -23,7 +23,8 @@ const Users = sequelize.define('users',{
     Password : {
         type : Sequelize.STRING,
         allowNull : false
-    }
+    },
+    isPremiumuser : Sequelize.STRING
 })
 
 module.exports = Users;
