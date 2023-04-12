@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 const userRoutes = require('./routes/user');
 const purchaseRoutes = require('./routes/purchase');
+const premiumRoutes = require('./routes/premium');
 
 const bodyParser = require('body-parser');
 const sequelize = require('./utils/database');
@@ -17,6 +18,7 @@ app.use(bodyParser.json({ extended : false }));
 
 app.use('/user',userRoutes);
 app.use('/purchase',purchaseRoutes);
+app.use('/premium',premiumRoutes)
 
 Users.hasMany(expenses);
 expenses.belongsTo(Users);
