@@ -2,8 +2,10 @@ const Users = require('../model/users');
 const expenses = require('../model/expenses');
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
+const sequelize = require('../utils/database');
 
 exports.addUser = async function (req,res,next){
+    const t = await sequelize.transaction();
    console.log(req.body);
    const name = req.body.username;
    const EmaiL = req.body.email;
@@ -24,10 +26,12 @@ bcrypt.hash(password,saltRounds,async function (err,hash) {
                  Password : hash,
                  isPremiumuser : "false",
                  totalExpense : 0
-               })
-
-               res.json({
-                duplicate : false
+               },{transaction : t})
+               .then(()=>{
+                  t.commit();
+                    res.json({
+                    duplicate : false
+                    })
                })
        }
        else{
@@ -37,24 +41,20 @@ bcrypt.hash(password,saltRounds,async function (err,hash) {
          }
     }
     catch(err){
+        t.rollback();
        console.log(err);
        }  
      }
   })
 }
 
-exports.getUser = (req,res,next) =>{
-    const email = req.params.Email;
-    console.log(email);
-}
-
-exports.Login = (req,res,next)=>{
+exports.Login = async function (req,res,next){
+    try{
     const userEmail = req.body.email;
     const userPassword = req.body.password;
     let userDataInDB;
     //console.log(req.body);
-    Users.findOne( { where : {Email : userEmail } } )
-    .then((user)=>{
+   let user = await Users.findOne( { where : {Email : userEmail } } )
         userDataInDB = user;
         console.log(userDataInDB);
         if(!user){
@@ -89,13 +89,17 @@ exports.Login = (req,res,next)=>{
                 }
             })
         }
-    })
-        .catch(err=>console.log(err));
+    }
+    catch(err) {
+    console.log(err);
+  }
 }
 
 
 
 exports.addExpense = async function (req,res,next){
+    const t = await sequelize.transaction();
+
     const amount = req.body.amount;
     const description = req.body.description;
     const category = req.body.category;
@@ -111,31 +115,34 @@ exports.addExpense = async function (req,res,next){
                amount : amount,
                description : description,
                category: category,
+        },{transaction : t})
+        .then(async function(){
+             await t.commit();
+            console.log('updated successfully');
         })
-           console.log('updated successfully');
        }
         catch(err){
+            await t.rollback();
           console.log(err)
         }
     }
 
-exports.getExpenses = (req,res,next)=>{
+exports.getExpenses = async function (req,res,next){
+    try{
     console.log("from get expenses controller ");
     let userId = req.user.Id;
     let User;
     let username;
-    Users.findOne({where : {Id:userId}})
-    .then((user)=>{
+    let user = await Users.findOne({where : {Id:userId}})
         User=user;
-     //console.log(user);
      username = user.Username;
-     user.getExpenses()
-     .then((expense)=>{
-        //console.log(expense);
+    let expense = await user.getExpenses()
         res.status(200).json({headers : {isour : User.isPremiumuser},expense});
-     })
-    })
-   .catch(err=>console.log(err));
+   }
+   catch(err){
+       console.log(err);
+   }
+    
 }
 
 exports.deleteExpense = async function (req,res,next) {
@@ -147,29 +154,29 @@ exports.deleteExpense = async function (req,res,next) {
     let user = await Users.findOne({ where : { id : userId }})
         let Oldtotal = user.TotalExpense; 
         let newtotal;
-        user.getExpenses({where : {id:expenseid}})
-        .then((expenseToDelete)=>{
-            newtotal = Oldtotal - expenseToDelete[0].amount;
-           user.update({TotalExpense : newtotal});
-        console.log(expenseToDelete[0]);
+      let expenseToDelete = await user.getExpenses({where : {id:expenseid}})
+         newtotal = Oldtotal - expenseToDelete[0].amount;
+         user.update({TotalExpense : newtotal});
          expenseToDelete[0].destroy();
          console.log("expense deleted");
          res.status(200)
-       })
     }
     catch(err){
         console.log(err);
     }
 }
 
-exports.getDetails = (req,res,next) => {
+exports.getDetails = async function (req,res,next){
+    try{
  let userId = req.user.Id;
  
- Users.findOne({where : {Id : userId}})
- .then((user)=>{
+ let user = await Users.findOne({where : {Id : userId}})
      console.log(user.isPremiumuser);
      res.status(200).json({isour : user.isPremiumuser})
- })
+ }
+ catch(err){
+    console.log(err); 
+  }
 }
     
 

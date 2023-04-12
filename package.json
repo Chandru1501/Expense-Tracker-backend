@@ -11,8 +11,9 @@
     "nodemon": "^2.0.22",
     "paytm-pg-node-sdk": "^1.0.4",
     "razorpay": "^2.8.5",
-    "request-promise": "^4.2.6",
-    "sequelize": "^6.30.0"
+    "request-promise": "^0.0.1",
+    "sequelize": "^6.30.0",
+    "sib-api-v3-sdk": "^8.5.0"
   },
   "name": "expense-tracker---backend",
   "version": "1.0.0",

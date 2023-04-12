@@ -7,8 +7,6 @@ const authendication = require('../middleware/authendication');
 
 router.post('/add-user',userController.addUser);
 
-router.get('/get-user/:Email',userController.getUser);
-
 router.post('/login',userController.Login);
 
 router.post('/add-expense',authendication.authendicate,userController.addExpense);

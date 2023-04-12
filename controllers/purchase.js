@@ -6,7 +6,7 @@ const purchase = require('../routes/purchase');
 require('dotenv').config()
 
 
-exports.generateOrderId = (req,res,next) => {
+exports.generateOrderId = async function(req,res,next){
     console.log(req.user);
     console.log("payment");
     var rzp = new Razorpay({
@@ -18,19 +18,17 @@ exports.generateOrderId = (req,res,next) => {
       amount: 50000,  // amount in the smallest currency unit
       currency: "INR",
     };
-    rzp.orders.create(options, function(err, order) {
+    rzp.orders.create(options, async function(err, order) {
         try{
             if(err){
                 throw new Error(JSON.stringify(err));
             }
           console.log(order);
-          User.findOne({where : {Id : req.user.Id}})
-          .then(user=>{
-              user.createOrder({orderId : order.id,status:"PENDING"})
+          let user = await User.findOne({where : {Id : req.user.Id}})
+          user.createOrder({orderId : order.id,status:"PENDING"})
               .then(()=>{
                 res.status(201).json({order, key_id : rzp.key_id})
               })
-          })
         }
         catch(err){
          console.log(err);
