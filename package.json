@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@types/request-promise": "^4.1.48",
+    "aws-sdk": "^2.1359.0",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",

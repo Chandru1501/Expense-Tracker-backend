@@ -99,10 +99,12 @@ exports.Login = async function (req,res,next){
 
 exports.addExpense = async function (req,res,next){
     const t = await sequelize.transaction();
-
     const amount = req.body.amount;
     const description = req.body.description;
     const category = req.body.category;
+    const date = req.body.date;
+    let income = req.body.income;
+    
     // from req headers
     const userId = req.user.Id;
     console.log("from add expense controller ");
@@ -113,6 +115,8 @@ exports.addExpense = async function (req,res,next){
         user[0].update({TotalExpense : total});
         user[0].createExpense({
                amount : amount,
+               income : income,
+               date: date,
                description : description,
                category: category,
         },{transaction : t})
