@@ -135,7 +135,8 @@ exports.getExpenses = async function (req,res,next){
     try{
         console.log("from get expenses controller ");
     let PageNo = req.query.page || 1;
-    let dataPerPage = 2;
+    let dataPerPage = Number(req.headers.noofrows);
+    console.log(dataPerPage);
     let TotalNumbers;
     console.log("PageNO :", PageNo);
     let userId = req.user.Id;
