@@ -133,15 +133,32 @@ exports.addExpense = async function (req,res,next){
 
 exports.getExpenses = async function (req,res,next){
     try{
-    console.log("from get expenses controller ");
+        console.log("from get expenses controller ");
+    let PageNo = req.query.page || 1;
+    let dataPerPage = 2;
+    let TotalNumbers;
+    console.log("PageNO :", PageNo);
     let userId = req.user.Id;
     let User;
     let username;
     let user = await Users.findOne({where : {Id:userId}})
         User=user;
      username = user.Username;
-    let expense = await user.getExpenses()
-        res.status(200).json({headers : {isour : User.isPremiumuser},expense});
+    TotalNumbers = await user.countExpenses();
+    console.log("Total ",TotalNumbers)
+    let expense = await user.getExpenses({
+       offset : (PageNo-1) * dataPerPage,
+       limit : dataPerPage,
+    })
+    let pageData = {
+        currentPage : PageNo,
+        hasNextPage : (PageNo * dataPerPage)<TotalNumbers,
+        nextPage :  Number(PageNo)+1,
+        hasPreviousPage : PageNo>1,
+        previousPage : PageNo-1,
+        lastPage : Math.ceil(TotalNumbers/dataPerPage)
+    }
+        res.status(200).json({headers : {isour : User.isPremiumuser},expense,pageData});
    }
    catch(err){
        console.log(err);
