@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const helmet = require('helmet');
+const morgan = require('morgan');
+const fs = require('fs');
 const userRoutes = require('./routes/user');
 const purchaseRoutes = require('./routes/purchase');
 const premiumRoutes = require('./routes/premium');
@@ -17,7 +20,13 @@ const download = require('./model/download');
 
 app.use(express.static(path.join(__dirname,'public')))
 
+const logFiles = fs.createWriteStream(path.join(__dirname,'logFiles'),{flags:"a"}); 
+
 app.use(cors());
+
+app.use(helmet());
+
+app.use(morgan('combined',{stream:logFiles}))
 
 app.use(bodyParser.json({ extended : false }));
 

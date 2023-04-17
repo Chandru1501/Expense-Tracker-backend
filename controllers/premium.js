@@ -54,7 +54,6 @@ exports.download = async function(req,res,next){
     });
     count=0;
     console.log(csvArr.join(","));
-    //fs.writeFileSync('data.csv',csvArr.join(','));
     let csv = csvArr.join(',');
     let fileURL = await AwsServices.UploadToS3(csv,`${name}${new Date()}.csv`)
     let TodayDate = new Date();
