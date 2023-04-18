@@ -16,7 +16,7 @@ async function resetPw(event){
      UUID : uuid[5] 
     }
 
-    let response = await axios.post('http://localhost:8080/password/reset-old-password',myObj);
+    let response = await axios.post('3.84.62.143:8080/password/reset-old-password',myObj);
     console.log(response);
     if(response){
         alert("password changed");
