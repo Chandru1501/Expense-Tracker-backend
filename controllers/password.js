@@ -8,8 +8,6 @@ const { error } = require('console');
 const bcrypt = require('bcrypt');
 const { Transaction } = require('sequelize');
 
-require('dotenv').config();
-
 exports.sendResetmail = async function (req,res,next){
   try{
     const t = await sequelize.transaction();
