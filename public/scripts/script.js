@@ -2,21 +2,29 @@ let userEmail = document.querySelector('#emailReset')
 let newPassword = document.querySelector('#passwordReset')
 let resetBtn = document.querySelector('#resetBtn')
 let UserNotFound = document.querySelector('#resetUserNotFound')
+
 let url = window.location.href;
 let uuid = url.split('/');
 console.log(uuid[5]);
 
-async function resetPw(event){
+// resetBtn.addEventListener('click',resetPw);
+
+let form  = document.querySelector('form');
+
+form.onsubmit = resetPw
+
+async function resetPw(e){
     try{
     UserNotFound.style.display="none";
-    event.preventDefault();
+    e.preventDefault();
     let myObj = {
      UserEmail : userEmail.value,
      newPassword : newPassword.value,
      UUID : uuid[5] 
     }
-
-    let response = await axios.post('3.84.62.143:8080/password/reset-old-password',myObj);
+console.log(myObj);
+    
+    let response = await axios.post('http://localhost:8080/password/reset-old-password',myObj);
     console.log(response);
     if(response){
         alert("password changed");

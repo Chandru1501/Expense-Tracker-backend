@@ -73,23 +73,30 @@ async function SendEmail(Email,uuid) {
    return response;
  }
   catch(err) {
+    res.status(402).json({message : "some error occured"})
     console.log(err);
    }  
 }
 
 
 exports.resetPassword = async function(req,res,next){
+  try{
   let UUID = req.params.uuid;
   let data = await ForgotPasswordDB.findOne({where : { id:UUID }});
   console.log("is Active ",data.isActive!=false);
   if(data.isActive!=false){
    await data.update({isActive:true});
+   res.setHeader('Content-Security-Policy', "script-src 'self' https://cdn.jsdelivr.net");
     res.sendFile( path.join(__dirname,'..','views','reset_password.html'));
   }
   else{
     res.status(404).send('<h2>LINK EXPIRED</h2>')
   }
-  
+}
+catch(err){
+  console.log(err)
+  res.send('<h1>some error occured</h1>')
+}
 }
 
 
