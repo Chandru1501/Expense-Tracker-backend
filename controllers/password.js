@@ -68,7 +68,7 @@ async function SendEmail(Email,uuid) {
     sender,
     to : receivers,
     subject : "reset password",
-    htmlcontent : `<h3>click this link to reset your password<h3><br><a href="http://localhost:8080/password/resetpassword/${uuid}">Reset_Password</a>`,
+    htmlcontent : `<h3>click this link to reset your password<h3><br><a href="https://18.212.23.246:8080/password/resetpassword/${uuid}">Reset_Password</a>`,
   })
    return response;
  }
@@ -142,5 +142,6 @@ if(user){
   }
   catch(err){
     console.log(err);
+    return res.status(404).json({message : "error"});
   }
 }

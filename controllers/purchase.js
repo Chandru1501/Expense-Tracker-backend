@@ -52,7 +52,10 @@ exports.updatePaymentStatus = async function(req,res,next) {
     .then(()=>{
         return res.status(202).json({success : true , message : "transaction successfull"})
     })
-     .catch(err=>console.log(err));
+     .catch(err=>{
+        res.status(400).json({"message" : "error occured"})
+        console.log(err);
+     })
    
 }
 

@@ -94,6 +94,7 @@ exports.Login = async function (req,res,next){
         }
     }
     catch(err) {
+        res.status(400).json({"message" : "error occured"})
     console.log(err);
   }
 }
@@ -188,7 +189,7 @@ exports.deleteExpense = async function (req,res,next) {
          user.update({TotalExpense : newtotal});
          expenseToDelete[0].destroy();
          console.log("expense deleted");
-         res.status(200)
+         res.status(200).json({"message" : "successfully deleted"})
     }
     catch(err){
         console.log(err);
