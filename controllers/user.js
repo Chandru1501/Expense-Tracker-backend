@@ -43,6 +43,9 @@ bcrypt.hash(password,saltRounds,async function (err,hash) {
     catch(err){
         t.rollback();
        console.log(err);
+       res.status(409).json({
+        duplicate : false
+       })
        }  
      }
   })
@@ -91,6 +94,7 @@ exports.Login = async function (req,res,next){
         }
     }
     catch(err) {
+        res.status(400).json({"message" : "error occured"})
     console.log(err);
   }
 }
@@ -122,11 +126,13 @@ exports.addExpense = async function (req,res,next){
         },{transaction : t})
         .then(async function(){
              await t.commit();
+             res.status(200).json({"message" : "successfull"})
             console.log('updated successfully');
         })
        }
         catch(err){
             await t.rollback();
+            res.status(402).json({"message" : "failed"})
           console.log(err)
         }
     }
@@ -163,6 +169,8 @@ exports.getExpenses = async function (req,res,next){
    }
    catch(err){
        console.log(err);
+       res.status(404).json({"message" : "failed"});
+
    }
     
 }
@@ -181,10 +189,11 @@ exports.deleteExpense = async function (req,res,next) {
          user.update({TotalExpense : newtotal});
          expenseToDelete[0].destroy();
          console.log("expense deleted");
-         res.status(200)
+         res.status(200).json({"message" : "successfully deleted"})
     }
     catch(err){
         console.log(err);
+        res.status(404).json({"message" : "failed"});
     }
 }
 
@@ -198,6 +207,7 @@ exports.getDetails = async function (req,res,next){
  }
  catch(err){
     console.log(err); 
+    res.status(404).json({"message" : "failed"});
   }
 }
     

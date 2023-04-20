@@ -1,9 +1,5 @@
 const User = require('../model/users');
-const Expenses = require('../model/expenses');
-const sequelize = require('../utils/database');
-const Sequelize = require('sequelize');
 const fs = require('fs');
-const AWS = require('aws-sdk');
 const AwsServices = require('../services/AWS');
 const download = require('../model/download');
 
@@ -78,7 +74,6 @@ try{
   let user = await User.findOne({where : {Id : myuser}});
   console.log(user);
  let downloadData = await user.getDownloads();
-//  console.log(downloadData);
  res.status(200).json({success : true , downloadData});
 }
 catch(err){

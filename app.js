@@ -1,3 +1,7 @@
+const dotenv = require('dotenv');
+
+dotenv.config();
+
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -18,7 +22,7 @@ const Order = require('./model/order');
 const forgetPassword = require('./model/forgotPassword');
 const download = require('./model/download');
 
-app.use(express.static(path.join(__dirname,'public')))
+app.use(express.static(path.join(__dirname,'public')));
 
 const logFiles = fs.createWriteStream(path.join(__dirname,'logFiles'),{flags:"a"}); 
 
@@ -48,11 +52,18 @@ Users.hasMany(download);
 download.belongsTo(Users);
 
 
+
+app.use('/',(req,res)=>{
+  console.log(req.url);
+  res.setHeader('Content-Security-Policy', "script-src 'self' https://cdn.jsdelivr.net");
+  res.sendFile(path.join(__dirname,`public/expensetracker-frontend/${req.url}`))
+})
+
 // sequelize.sync({force : true})
 sequelize.sync()
 .then((response)=>{
     //console.log(response);
     console.log("server running")
-    app.listen(8080);
+  app.listen(8080)
 })
 .catch(err=>console.log(err));

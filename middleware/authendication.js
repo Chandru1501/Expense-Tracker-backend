@@ -13,6 +13,7 @@ exports.authendicate = (req,res,next) => {
     next();
   }
     catch(err){
+      res.status(404).json({"message" : "you are not our user" })
       console.log(err);
     }
 }

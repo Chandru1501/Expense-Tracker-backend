@@ -8,8 +8,6 @@ const { error } = require('console');
 const bcrypt = require('bcrypt');
 const { Transaction } = require('sequelize');
 
-require('dotenv').config();
-
 exports.sendResetmail = async function (req,res,next){
   try{
     const t = await sequelize.transaction();
@@ -70,28 +68,35 @@ async function SendEmail(Email,uuid) {
     sender,
     to : receivers,
     subject : "reset password",
-    htmlcontent : `<h3>click this link to reset your password<h3><br><a href="http://localhost:8080/password/resetpassword/${uuid}">Reset_Password</a>`,
+    htmlcontent : `<h3>click this link to reset your password<h3><br><a href="https://18.212.23.246:8080/password/resetpassword/${uuid}">Reset_Password</a>`,
   })
    return response;
  }
   catch(err) {
+    res.status(402).json({message : "some error occured"})
     console.log(err);
    }  
 }
 
 
 exports.resetPassword = async function(req,res,next){
+  try{
   let UUID = req.params.uuid;
   let data = await ForgotPasswordDB.findOne({where : { id:UUID }});
   console.log("is Active ",data.isActive!=false);
   if(data.isActive!=false){
    await data.update({isActive:true});
+   res.setHeader('Content-Security-Policy', "script-src 'self' https://cdn.jsdelivr.net");
     res.sendFile( path.join(__dirname,'..','views','reset_password.html'));
   }
   else{
     res.status(404).send('<h2>LINK EXPIRED</h2>')
   }
-  
+}
+catch(err){
+  console.log(err)
+  res.send('<h1>some error occured</h1>')
+}
 }
 
 
@@ -137,5 +142,6 @@ if(user){
   }
   catch(err){
     console.log(err);
+    return res.status(404).json({message : "error"});
   }
 }
