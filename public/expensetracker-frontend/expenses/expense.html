@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Expenses app</title>
+    <link rel="stylesheet" href="expense-style.css">
+</head>
+<body>
+    <nav>
+        <h2>Expense Tracker</h2>
+        <button id="rzp-button1" class="btn btn-success">Buy premium</button>
+        <p id="premiumUser">You are our Premium user</p>
+        <ul class="beforePremium">
+            <a href="./expense-table.html">Expense Table</a>
+            <a href="/Login.html">Logout</a>
+        </ul>
+        <ul class="afterPremium">
+            <a href="./expense-table.html">Expense Table</a>
+            <a href="/Login.html">Logout</a>
+        </ul>
+    </nav>
+    <p id="tospacing"></p>
+    <p id="premium-text" class="text-danger">Buy premium membership to access our more features</p>
+    <h2 id="userWelcome">Hello,<name></name></h2>
+    <form method="POST"> 
+        <div class="container">
+            <h3>ENTER DETAILS</h3>
+            <hr>
+            <div class="align-self-center">
+                <label for="amount">Enter expense amount</label><br>
+                <input type="Number" id="amount" class="form-control" class="input" name="expenseamount" required/>
+                <label for="income">Enter income amount</label><br>
+                <input type="Number" id="income" class="form-control" placeholder="optional" class="input" name="income">
+                <input type="date" id="dateInput" name="dateInput" required>
+            </div>
+            <div class="dropdown1">
+                <label for="descriptioninput">Choose description</label><br>
+                <input id="descriptioninput" class="form-control" name="description"  required />
+                
+                <select id="description" name="description" name="description" class="choose"data-role="select-dropdown" data-profile="minimal">
+                    <li><option>Choose</option></li>
+                    <option>Movie</option>
+                    <option>House rent</option>
+                    <option>Food</option>
+                    <option>Dress</option>
+                    <option>Electricity</option>
+                    <option>Fuel</option>
+                    
+                    
+                </select>
+        </div>
+        <div class="dropdown2">
+            <label for="category">Choose category</label><br>
+            <input id="categoryinput" class="form-control" name="category"  required />
+            
+            <select name="category" id="category" class="choose" data-role="select-dropdown" data-profile="minimal" >
+                <option>Choose</option>
+                <option>Movie</option>
+                <option>House rent</option>
+                <option>Food</option>
+                <option>Dress</option>
+                <option>Fuel</option>
+                <option>Electricity</option>
+                <option>Travel</option>
+            </select>
+        </div>
+             <button id="submiting" type="submit" class="btn btn-info">Add expense</button>
+            </form>
+            
+            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+            <script src="expense-script.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        </body>
+        </html>

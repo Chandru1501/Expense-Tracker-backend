@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400&display=swap');
+
+
+body{
+    font-family: 'Roboto Slab', serif;
+    background-color: rgb(43, 29, 29);
+}
+h2{
+    text-align: center;
+    margin-top: 10px;
+}
+#total{
+    text-align: center;
+    color: aliceblue;
+
+}
+
+nav{
+    border: 1px solid;
+    height: 85px;
+    background-color: rgb(248, 248, 12);
+}
+
+table, td, th {
+    border: 1px solid;
+    background-color: aliceblue;
+    text-align: center;
+}
+th{
+  color:rgb(2, 91, 255);
+}
+
+#items{
+    margin-top: 40px;
+    /* width: 1000px;
+    height: 250px;
+    margin-left: 13%; */
+}
+
+
+ul{
+    text-align:end;
+    margin-right: 50px;
+}
+
+button{
+    margin: 10px;
+}
+#userWelcome{
+    color:rgb(0, 194, 0);
+    text-align: center;
+  }
+
+#HideOrView{
+    display: none;
+}
+.showBydateBasis{
+    display: none;
+}
+#download{
+    float: right;
+    margin-right: 20px;
+}
+#olderdownloads{
+    float:right
+}
+#downloaddatadiv{
+    display: none;
+    float: right;
+    margin: 30px;
+}
+.pagination{
+    width: 100px; 
+    margin-left: auto;
+    margin-right: auto;
+}
+#current{
+    height: 80px;
+}
+#NoOfDataperpage{
+ /* border: 2px solid;  */
+   color:azure;
+     margin-left: 20px; 
+}
