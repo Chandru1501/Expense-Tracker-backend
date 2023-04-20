@@ -13,6 +13,7 @@ const purchaseRoutes = require('./routes/purchase');
 const premiumRoutes = require('./routes/premium');
 const passwordRoutes = require('./routes/password');
 const path= require('path');
+const https = require('https');
 
 const bodyParser = require('body-parser');
 const sequelize = require('./utils/database');
@@ -33,6 +34,9 @@ app.use(helmet());
 app.use(morgan('combined',{stream:logFiles}))
 
 app.use(bodyParser.json({ extended : false }));
+
+const private_key= fs.readFileSync('key.pem');
+const certificate= fs.readFileSync('certificate.pem');
 
 app.use('/user',userRoutes);
 app.use('/purchase',purchaseRoutes);
@@ -63,7 +67,7 @@ app.use('/',(req,res)=>{
 sequelize.sync()
 .then((response)=>{
     //console.log(response);
-    console.log("server running")
-  app.listen(8080)
+console.log("server running")
+  https.createServer({key :private_key , cert :certificate},app).listen(3000);
 })
 .catch(err=>console.log(err));

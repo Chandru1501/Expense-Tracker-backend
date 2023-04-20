@@ -28,7 +28,7 @@ async function showORhideLeaderBoard(){
     }
     let token = localStorage.getItem("token");
     console.log(token);
-    let response = await axios.get('http://localhost:8080/premium/get-leaderboard',{headers : { "authorization" : token }})
+    let response = await axios.get('https://50.19.206.111:3000/premium/get-leaderboard',{headers : { "authorization" : token }})
     console.log(response.data);
     
     response.data.forEach((data)=>{
@@ -224,7 +224,7 @@ ShowByDateBTN.addEventListener('click',()=>{
 downloadBtn.addEventListener('click',async()=>{
   try{
     let token = localStorage.getItem("token");
-    let response = await axios.get('http://localhost:8080/premium/download',{headers : {"authorization" : token}})
+    let response = await axios.get('https://50.19.206.111:3000/premium/download',{headers : {"authorization" : token}})
     console.log(response);
     var a = document.querySelector('a');
     a.href =response.data;
@@ -279,7 +279,7 @@ olderDownloads.addEventListener('click',async()=>{
   else{
     let token = localStorage.getItem('token');
     
-    let response = await axios.get('http://localhost:8080/premium/getdownloadlinks',{headers : {"authorization" : token}});
+    let response = await axios.get('https://50.19.206.111:3000/premium/getdownloadlinks',{headers : {"authorization" : token}});
     console.log(response.data.downloadData);
     let downloaddata = response.data.downloadData;
   
@@ -401,7 +401,7 @@ async function getAllExpenses(PageNo){
       }
       console.log(rows);
       console.log(token);
-    let response = await axios.get(`http://localhost:8080/user/get-expenses`,{ headers : { "authorization" : token ,"noofrows" : rows }});
+    let response = await axios.get(`https://50.19.206.111:3000/user/get-expenses`,{ headers : { "authorization" : token ,"noofrows" : rows }});
     verify(response.data.headers);
     UserTotalExpensesData = response.data.expense;
     // console.log(response.data);
@@ -415,7 +415,7 @@ async function getAllExpenses(PageNo){
       }
       console.log(token);
       console.log(rows);
-    let response = await axios.get(`http://localhost:8080/user/get-expenses?page=${PageNo}`,{ headers : { "authorization" : token ,"noofrows" : rows }});
+    let response = await axios.get(`https://50.19.206.111:3000/user/get-expenses?page=${PageNo}`,{ headers : { "authorization" : token ,"noofrows" : rows }});
     verify(response.data.headers);
     UserTotalExpensesData = response.data.expense;
     return response.data;
@@ -430,7 +430,7 @@ async function deleteExpense(expenseid){
   try{
   let token = localStorage.getItem("token");
   console.log(token);
-  let response = await axios.get(`http://localhost:8080/user/delete-expense/${expenseid}`,{ headers : { "authorization" : token } });
+  let response = await axios.get(`https://50.19.206.111:3000/user/delete-expense/${expenseid}`,{ headers : { "authorization" : token } });
   console.log(`${id} deleted`);
   }
   catch(err){

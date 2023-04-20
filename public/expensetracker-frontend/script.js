@@ -15,6 +15,9 @@ btn.addEventListener('click',()=>{
 userFound.style.display="none";
 })
 
+
+
+
 let forms  = document.querySelector('form');
 
 forms.onsubmit = addUser;
@@ -33,10 +36,10 @@ postUser(myObj);
 
 async function postUser(myObj){
   console.log(myObj);
- axios.post("https://18.212.23.246:8080/user/add-user",myObj)
+ axios.post("https://50.19.206.111:3000/user/add-user",myObj)
  .then((response)=>{
     console.log(response);
-    location.replace('https://18.212.23.246:8080/login.html') })
+    location.replace('https://50.19.206.111:3000/login.html') })
  .catch((err)=>{
   console.log(err.response.status);
   if(err.response.status==409){
@@ -80,21 +83,21 @@ console.log(myLogin);
 }
 
 async function userLogin(myLogin){
-axios.post('https://18.212.23.246:8080/user/login',myLogin)
+axios.post('https://50.19.206.111:3000/user/login',myLogin)
 .then((response)=>{
     console.log(response);
     if(response.data.status=="login Successfull"){
         if(localStorage.getItem("token")==null && localStorage.getItem('username')==null){
             localStorage.setItem("token",response.data.token)
             localStorage.setItem("username",response.data.username)
-            location.replace('https://18.212.23.246:8080/expensetracker-frontend/expenses/expense.html')
+            location.replace('https://50.19.206.111:3000/expensetracker-frontend/expenses/expense.html')
         }
         else{
            localStorage.removeItem("token");
            localStorage.removeItem('username');
            localStorage.setItem("token",response.data.token)
            localStorage.setItem("username",response.data.username)
-          location.replace('https://18.212.23.246:8080/expensetracker-frontend/expenses/expense.html')
+          location.replace('https://50.19.206.111:3000/expensetracker-frontend/expenses/expense.html')
         }    
     }
 })
@@ -139,7 +142,7 @@ function resetPw(event)  {
 
 async function postNow(resetemail){
   try{
-  let response = await axios.post('https://18.212.23.246:8080/password/forgotpassword',resetemail)
+  let response = await axios.post('https://50.19.206.111:3000/password/forgotpassword',resetemail)
   console.log(response);
       alert("Password reseting link has been sent to your mail ID");
   }
