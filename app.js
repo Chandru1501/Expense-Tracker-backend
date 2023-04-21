@@ -35,8 +35,8 @@ app.use(helmet());
 
 app.use(bodyParser.json({ extended : false }));
 
-const private_key= fs.readFileSync('key.pem');
-const certificate= fs.readFileSync('certificate.pem');
+//const private_key= fs.readFileSync('key.pem');
+//const certificate= fs.readFileSync('certificate.pem');
 
 app.use('/user',userRoutes);
 app.use('/purchase',purchaseRoutes);
@@ -68,6 +68,6 @@ sequelize.sync()
 .then((response)=>{
     //console.log(response);
 console.log("chandrprakash`s server is running on port 3000")
-  https.createServer({key :private_key , cert :certificate},app).listen(443);
+     app.listen(443);
 })
 .catch(err=>console.log(err));
