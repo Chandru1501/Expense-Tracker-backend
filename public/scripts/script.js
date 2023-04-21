@@ -24,7 +24,7 @@ async function resetPw(e){
     }
 console.log(myObj);
     
-    let response = await axios.post('https://50.19.206.111:8080/password/reset-old-password',myObj);
+    let response = await axios.post('https://50.19.206.111:3000/password/reset-old-password',myObj);
     console.log(response);
     if(response){
         alert("password changed");
