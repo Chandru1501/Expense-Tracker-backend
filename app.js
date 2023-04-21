@@ -25,13 +25,13 @@ const download = require('./model/download');
 
 app.use(express.static(path.join(__dirname,'public')));
 
-const logFiles = fs.createWriteStream(path.join(__dirname,'logFiles'),{flags:"a"}); 
+//const logFiles = fs.createWriteStream(path.join(__dirname,'logFiles'),{flags:"a"}); 
 
 app.use(cors());
 
 app.use(helmet());
 
-app.use(morgan('combined',{stream:logFiles}))
+//app.use(morgan('combined',{stream:logFiles}))
 
 app.use(bodyParser.json({ extended : false }));
 
@@ -67,7 +67,7 @@ app.use('/',(req,res)=>{
 sequelize.sync()
 .then((response)=>{
     //console.log(response);
-console.log("this server running on port 3000")
+console.log("the chandrprakash`s server is running on port 3000")
   https.createServer({key :private_key , cert :certificate},app).listen(3000);
 })
 .catch(err=>console.log(err));
