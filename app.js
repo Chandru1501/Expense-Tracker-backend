@@ -67,7 +67,6 @@ app.use('/',(req,res)=>{
 sequelize.sync()
 .then((response)=>{
     //console.log(response);
-console.log('all are working fine')
 console.log("chandrprakash`s server is running on port 3000")
   https.createServer({key :private_key , cert :certificate},app).listen(3000);
 })
