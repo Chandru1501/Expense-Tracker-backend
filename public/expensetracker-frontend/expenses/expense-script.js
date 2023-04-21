@@ -57,7 +57,7 @@ async function postexpense(myObj){
   try{
     let token = localStorage.getItem('token');
     console.log(token);
-  let response = await axios.post('https://50.19.206.111:3000/user/add-expense',myObj,{ headers : {"authorization" : token } })
+  let response = await axios.post('https://chandraprakash.tech/user/add-expense',myObj,{ headers : {"authorization" : token } })
   console.log("posted");
   return response;
   }
@@ -70,7 +70,7 @@ async function postexpense(myObj){
 
 document.querySelector('#rzp-button1').onclick = async function(){
   let token = localStorage.getItem('token');
-  let response = await axios.get('https://50.19.206.111:3000/purchase/premiummembership',{ headers : { "authorization" : token } });
+  let response = await axios.get('https://chandraprakash.tech/purchase/premiummembership',{ headers : { "authorization" : token } });
   console.log(response);
 
   var options = {
@@ -81,7 +81,7 @@ document.querySelector('#rzp-button1').onclick = async function(){
   
       alert("you are our premium user");
       //  location.reload();
-      await axios.post('https://50.19.206.111:3000/purchase/updatetransactionstatus',{
+      await axios.post('https://chandraprakash.tech/purchase/updatetransactionstatus',{
         payment_Id : response.razorpay_payment_id,
         order_Id : options.order_id
       },
@@ -102,7 +102,7 @@ document.querySelector('#rzp-button1').onclick = async function(){
 rzp1.on('payment.failed', async function (response){
   console.log(response.error.metadata);
         alert("somthing went wrong");
-       await axios.post('https://50.19.206.111:3000/purchase/updatefailurestatus',{
+       await axios.post('https://chandraprakash.tech/purchase/updatefailurestatus',{
         order_Id : response.error.metadata.order_id,
         payment_Id : response.error.metadata.payment_id
       },
@@ -133,7 +133,7 @@ let afterPremiumOptions = document.querySelector('.afterPremium');
 document.addEventListener('DOMContentLoaded',( async function (){
 
   let token = localStorage.getItem('token');
-  let response = await axios.get('https://50.19.206.111:3000/user/getdetails',{ headers : { "authorization" : token } });
+  let response = await axios.get('https://chandraprakash.tech/user/getdetails',{ headers : { "authorization" : token } });
   console.log(response.data.isour);
   isOur = response.data.isour;
   if(response.data.isour=='true'){

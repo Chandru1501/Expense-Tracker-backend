@@ -68,7 +68,7 @@ async function SendEmail(Email,uuid) {
     sender,
     to : receivers,
     subject : "reset password",
-    htmlcontent : `<h3>click this link to reset your password<h3><br><a href="https://50.19.206.111:3000/password/resetpassword/${uuid}">Reset_Password</a>`,
+    htmlcontent : `<h3>click this link to reset your password<h3><br><a href="https://chandraprakash.tech/password/resetpassword/${uuid}">Reset_Password</a>`,
   })
    return response;
  }
