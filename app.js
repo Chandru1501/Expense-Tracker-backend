@@ -24,9 +24,10 @@ const download = require('./model/download');
 
 app.use(express.static(path.join(__dirname,'public')));
 
-//const logFiles = fs.createWriteStream(path.join(__dirname,'logFiles'),{flags:"a"}); 
 
-app.use(cors());
+app.use(cors({
+  url : "http://50.19.206.111:80"
+}));
 
 app.use(helmet());
 

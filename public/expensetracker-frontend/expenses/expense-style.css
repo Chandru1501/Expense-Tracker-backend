@@ -113,3 +113,123 @@ hr{
     margin-top: 2px;
     display: none;
 }
+
+
+@media screen and (max-width: 480px) {
+    
+body{
+    font-family: 'Roboto Slab', serif;
+    background-color: rgb(43, 29, 29);
+}
+input{
+    height:30px
+}
+
+.container{
+ border: 2px solid;
+ border-radius: 3rem;
+ height: 360px;
+ width: 290px;
+ /* padding: 25px; */
+ margin-top: 30px;
+ margin-left: 42px;
+ background-color:azure;
+ border-color: red;
+}
+
+#submiting{
+    margin: 10px;
+    margin-left:24%;
+}
+h3{
+    margin-top: -15px;
+   text-align: center;
+   color: rgb(3, 125, 206); 
+}
+
+#total{
+    text-align: center;
+    color: aliceblue;
+
+}
+h2{
+    text-align: center;
+    margin-top: 10px;
+}
+table, td, th {
+    border: 1px solid;
+    background-color: aliceblue;
+}
+#items{
+    margin-top: 40px;
+    margin-left: -110px;
+    text-align: center;
+    margin-left: 4px;
+    visibility:hidden;
+}
+
+button{
+    margin-left: 6px;
+    margin-top: 8px;
+}
+nav{
+    border: 1px solid;
+    height: 85px;
+    background-color: rgb(248, 248, 12);
+    width: 100%;
+}
+hr{
+    width:150px;
+    margin-left: 50px;
+}
+
+#userWelcome{
+  color:rgb(0, 194, 0);
+  text-align: center;
+  margin-top: -30px;
+}
+
+/* after premium to do */
+#rzp-button1{
+    margin-top: 5px;
+    margin-left: 20px;
+    display: none;
+    font-size: x-small;
+}
+#premium-text{
+    border:3px solid rgb(8, 39, 214);
+    width: 220px;
+    margin-bottom: 30px;
+    display: none;
+    font-size: small;
+}
+.beforePremium{
+    text-align: end;
+    margin-top: -22px;
+    margin-right: 10px;
+    display: none;
+}
+
+
+
+
+
+/* afterpremium to do */
+
+.afterPremium{
+    text-align: end;
+    margin-top: -40px;
+    margin-right: 50px;
+    display: none;
+}
+#tospacing{
+    margin-bottom: 50px;
+    display: none;
+}
+
+#premiumUser{
+    margin-left: 20px;
+    margin-top: 2px;
+    display: none;
+}
+}

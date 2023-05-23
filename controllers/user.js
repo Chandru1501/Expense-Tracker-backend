@@ -153,6 +153,7 @@ exports.getExpenses = async function (req,res,next){
      username = user.Username;
     TotalNumbers = await user.countExpenses();
     console.log("Total ",TotalNumbers)
+    // pagination
     let expense = await user.getExpenses({
        offset : (PageNo-1) * dataPerPage,
        limit : dataPerPage,
