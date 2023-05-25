@@ -37,7 +37,6 @@ th{
     margin-left: 13%; */
 }
 
-
 ul{
     text-align:end;
     margin-right: 50px;
@@ -67,7 +66,6 @@ button{
    color:azure;
      margin-left: 20px; 
 }
-
 @media screen and (max-width: 480px) {
     body{
         font-family: 'Roboto Slab', serif;
@@ -109,7 +107,8 @@ button{
     
     ul{
         text-align:end;
-        margin-right: 50px;
+        margin-right: 8px;
+        font-size: small;
     }
     
     button{

@@ -24,7 +24,7 @@ async function resetPw(e){
     }
 console.log(myObj);
     
-    let response = await axios.post('https://chandraprakash.tech/password/reset-old-password',myObj);
+    let response = await axios.post('https://expense.chandraprakash.tech/password/reset-old-password',myObj);
     console.log(response);
     if(response){
         alert("password changed");

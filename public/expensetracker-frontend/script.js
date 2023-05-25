@@ -36,10 +36,10 @@ postUser(myObj);
 
 async function postUser(myObj){
   console.log(myObj);
- axios.post("http://50.19.206.111:80/user/add-user",myObj)
+ axios.post("https://expense.chandraprakash.tech/user/add-user",myObj)
  .then((response)=>{
     console.log(response);
-    location.replace('http://50.19.206.111:80/login.html') })
+    location.replace('https://expense.chandraprakash.tech/login.html') })
  .catch((err)=>{
   console.log(err.response.status);
   if(err.response.status==409){
@@ -83,21 +83,21 @@ console.log(myLogin);
 }
 
 async function userLogin(myLogin){
-axios.post('http://50.19.206.111:80/user/login',myLogin)
+axios.post('https://expense.chandraprakash.tech/user/login',myLogin)
 .then((response)=>{
     console.log(response);
     if(response.data.status=="login Successfull"){
         if(localStorage.getItem("token")==null && localStorage.getItem('username')==null){
             localStorage.setItem("token",response.data.token)
             localStorage.setItem("username",response.data.username)
-            location.replace('http://50.19.206.111:80/expensetracker-frontend/expenses/expense.html')
+            location.replace('https://expense.chandraprakash.tech/expensetracker-frontend/expenses/expense.html')
         }
         else{
            localStorage.removeItem("token");
            localStorage.removeItem('username');
            localStorage.setItem("token",response.data.token)
            localStorage.setItem("username",response.data.username)
-          location.replace('http://50.19.206.111:80/expensetracker-frontend/expenses/expense.html')
+          location.replace('https://expense.chandraprakash.tech/expensetracker-frontend/expenses/expense.html')
         }    
     }
 })
@@ -142,7 +142,7 @@ function resetPw(event)  {
 
 async function postNow(resetemail){
   try{
-  let response = await axios.post('http://50.19.206.111:80/password/forgotpassword',resetemail)
+  let response = await axios.post('https://expense.chandraprakash.tech/password/forgotpassword',resetemail)
   console.log(response);
       alert("Password reseting link has been sent to your mail ID");
   }
