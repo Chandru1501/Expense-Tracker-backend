@@ -190,7 +190,7 @@ hr{
 #userWelcome{
   color:rgb(0, 194, 0);
   text-align: center;
-  margin-top: -30px;
+  margin-top: 30px;
 }
 
 /* after premium to do */
@@ -209,8 +209,8 @@ hr{
 }
 .beforePremium{
     text-align: end;
-    margin-top: 0px;
-    margin-right: 40px;
+    margin-top: -28px;
+    margin-right: 8px;
     display: none;
 }
 
