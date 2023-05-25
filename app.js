@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname,'public')));
 
 
 app.use(cors({
-  url : "http://50.19.206.111:80"
+  url : "expense.chandraprakash.tech"
 }));
 
 app.use(helmet());
